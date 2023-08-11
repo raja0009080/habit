@@ -1,0 +1,100 @@
+<html><head>
+  <title> <%=title%> </title>
+</head>
+  <body>
+<link rel="stylesheet" href="/css/layout.css">
+
+<div class="has-bg-img">
+
+    <div id="add-habit-form" class="rounded bg-blue shadow p-3 mb-5" style="display: block;">
+        <h1>create habit first</h1>
+        <form action="/create-habit" method="post">
+
+            <input type="text " name="habit" placeholder="Add Habit name" required>
+           
+            <div> <label for="starting date">starting date</label>
+                <input type="date"  name="date" >
+            </div>
+            
+            <div><label for="end date">till the</label>
+            <input type="date" name="end" >
+            </div>
+           
+            <div> 
+                <label for="time"> timing </label>
+                <input type="time" name="time"  required>
+                <select id="ampm" name="ampm">
+                
+                </select>
+            </div>
+            <div>
+
+            </div>
+            <label for="inputState">Frequency</label>
+            <select id="inputState" class="form-control" name="frequency">
+                <option>Twice a Day</option>
+                <option selected="">Daily</option>
+                <optgroup label="Weekly">
+                  
+                    <option>Mon</option>
+                    <option>tus</option>
+                    <option>wed</option>
+                    <option>thur</option>
+                    <option>fri</option>
+                    <option>sat</option>
+                    <option>sun</option>
+
+                  </select>
+                </optgroup>
+            </select>
+            
+            <button type="submit" class="btn btn-primary"><i class="fa fa-plus"></i> Create Habit</button>
+            <button type="button" class="btn btn-danger" id="cancel-habit"><i class="fa fa-times"></i> Cancel</button>
+
+        </form>
+    <div id="add-habit" class="rounded bg-black shadow p-3 mb-5" style="display: block;">
+    <div>
+        <% for(let i of habit_list){ %>
+    
+       
+        <p>
+         <h1 id="habit"> <%= i.habit %></h1>
+         <div> starting
+          <%= i.date %></div>
+          end date
+          <%= i.end %><div>
+
+          
+          <%= i.frequency %> time is
+          <%= i.time%></div>
+          <%= i.ampm %></p>
+        </p>
+       
+
+
+        <a href="/delete-habit/?id=<%=i._id%>" >  
+           
+          <button onclick="document.getElementById('id01').style.display='block'">delete habit</button>
+    </a> 
+<%}%>
+
+<div id="id01" class="modal">
+  <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal"> × </span>
+  <form class="modal-content" action="/action_page.php">
+    <div class="container">
+      <h1>warning</h1>
+      <p>Are you sure you want to delete your habit?</p>
+    
+      <div class="clearfix">
+        <button type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">Cancel</button>
+        <button type="button" data-task="{{task.id}}" onclick="document.getElementById('id01').style.display='none'" class="deletebtn">Delete</button>
+      </div>
+    </div>
+  </form>
+ </div>
+    </div>
+
+    </div>
+</form>
+    <img class="bg-img" src="/image/alarm-clock.jpg" alt="background image"> </body>
+     </html>
